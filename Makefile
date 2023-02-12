@@ -4,13 +4,13 @@ CFLAGS = -Wall -Wextra -w -O3 `pkg-config --cflags gtk+-3.0 sdl2 SDL2_image`
 LDFLAGS =
 LDLIBS = `pkg-config --libs gtk+-3.0 sdl2 SDL2_image` -lm
 
-all : cut
+all: cut urlEncoder
 
-SRC : cut.c
+SRC = cut.c urlEncoder.c
 OBJ = ${SRC:.c=.o}
 EXE = ${SRC:.c=}
 
-cut: cut.o
+exec: ${OBJ}
 
 .PHONY: clean
 
