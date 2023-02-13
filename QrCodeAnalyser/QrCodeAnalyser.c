@@ -5,8 +5,9 @@
 #include <err.h>
 #include "QrCodeAnalyser.h"
 
-#define QRCODE_SIZE 33
+#define QRCODE_SIZE 29
 #define VERSION_INFORMATION_SIZE 6
+
 
 int main(int argc, char** argv)
 	{
@@ -15,22 +16,18 @@ int main(int argc, char** argv)
 
 		int versionInformation[VERSION_INFORMATION_SIZE];
 
+		int version = 0;
 
 		// remplis la matrice en pixels
 		SDL_Surface* surface = load_image(argv[1]);
 		int** mat=  getPixelMatrix(surface);
 
-		int  qrcode_pixels =  surface -> h;
+		int  qrcode_pixels = surface -> w * surface -> h;
 
 		int pixel_size = qrcode_pixels / (QRCODE_SIZE * QRCODE_SIZE);
 
-		errx(EXIT_FAILURE, "%d", pixel_size);
-
 		//initialise la matrice pour ensuite la remplire de carre plutot que de pixels
 		int squareQRCode[QRCODE_SIZE / pixel_size][QRCODE_SIZE/pixel_size];
-
-
-
 
 		//transformation de la matrice de pixels en une matrice de carres
 		int k, i, j, ii, jj;
@@ -46,7 +43,16 @@ int main(int argc, char** argv)
 			}
 		}
 
-		printf("tout va bien2");
+		printf("bjr");
+
+		for(int count = 0; count < QRCODE_SIZE / pixel_size; count ++)
+		{
+			for(int count2 = 0; count2 < QRCODE_SIZE/pixel_size; count2++){
+				printf("%d", squareQRCode[count][count2]);
+			}
+		}
+
+		/*
 
 		//detecte le cham version information
 		i, j, k = 0;
@@ -58,10 +64,10 @@ int main(int argc, char** argv)
 			}
 		}
 
-		printf("tout va bien 3");
 
 		//recuperation de la vesion
-		int version = 0;
+
+
 		for(i = 0; i < 6; i++)
 		{
 			version = (version << 1) | versionInformation[i];
@@ -74,7 +80,7 @@ int main(int argc, char** argv)
 		}
 		printf("\n");
 		printf("version: %d\n", version);
-
+*/
 		return 0;
 	}
 
