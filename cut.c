@@ -188,6 +188,38 @@ SDL_Surface* crop_qrcode(SDL_Surface *image, int x, int y, int w, int h)
 }
 
 
+
+void getPixelMatrix(SDL_Surface* image, int pixelMatrix[image->h][image->w]) {
+   int n = image->h;
+   int m = image->w;
+  // Loop through each pixel in the image and determine if it's black or white
+  for (int y = 0; y < n; y++) {
+    for (int x = 0; x < m; x++) {
+      Uint32 pixel = *((Uint32*)image->pixels + y * image->pitch / 4 + x);
+      Uint8 r, g, b;
+      SDL_GetRGB(pixel, image->format, &r, &g, &b);
+      int average = (r + g + b) / 3;
+      pixelMatrix[y][x] = (average >= 128) ? 0 : 1;
+    }
+  }
+  return;
+}
+/*
+void mat_to_qrMat(int n,int mat[n][n],int largeur_carre,int matQr[largeur_carre][largeur_carre] )
+{
+	int i = 0;
+	while (mat[0][i+1]==1)
+	{
+		i++;
+	}
+	int j = 0
+	while (mat[j+1][i]==1)
+	{
+		j++;
+	}
+	
+}*/
+
 int main(int argc, char** argv)
 {
     if (argc != 2)
@@ -204,21 +236,21 @@ int main(int argc, char** argv)
 
     //try to find upperleft corner
     
-    int i= get_index(surface,0);
-    if (i == -1 )
+    int index= get_index(surface,0);
+    if (index == -1 )
          errx(EXIT_FAILURE, "No QrCode");
 
-    int size = is_corner (surface,i);
+    int size = is_corner (surface,index);
     int x =0;
     while (size == -1)
     {
-            i= get_index(surface,i);
-            if (i!=-1)
-                size = is_corner (surface,i);
+            index= get_index(surface,index);
+            if (index!=-1)
+                size = is_corner (surface,index);
             else 
                 errx(EXIT_FAILURE, "No QrCode");
     }
-    x = i;
+    x = index;
 
     //corner found 
 
@@ -226,30 +258,42 @@ int main(int argc, char** argv)
     while (boo<=-1)
     {
         
-        i++;
-        if (i<size_haut*size_large)
+        index++;
+        if (index<size_haut*size_large)
         {
             //pixels[i] = SDL_MapRGB(format,1,250,1);
-            SDL_GetRGB(pixels[i],format,&r,&g,&b);
+            SDL_GetRGB(pixels[index],format,&r,&g,&b);
             if (r<10)
             {
-                boo = is_corner_bis (surface,i,size);
+                boo = is_corner_bis (surface,index,size);
                 if (boo<0)
-                    i+=size;
+                    index+=size;
             }
         }
         else 
             errx(EXIT_FAILURE, "No QrCode");
 
     }
-    int largeur = i + size - x;
+    int largeur = index + size - x;
 
     int y = x/size_large;
     x = x%size_large;
     surface=  crop_qrcode(surface,x-1,y, largeur, largeur);
 
     IMG_SavePNG(surface,"pretraitement.PNG");
-
+    
+    
+    int n = surface->h;
+    int m = surface->w;
+    int mat[n][m];
+    getPixelMatrix(surface,mat);
+    
+    for (int k = 0; k < n; k++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", mat[k][j]);
+        }
+        printf("\n");
+    }
     SDL_FreeSurface(surface);
     return 0;
 }
