@@ -1,16 +1,15 @@
 CC = gcc
 CPPFLAGS =
-CFLAGS = -Wall -Wextra -w -O3 `pkg-config --cflags gtk+-3.0 sdl2 SDL2_image`
+CFLAGS = -Wall -Wextra -O3 `pkg-config --cflags gtk+-3.0 sdl2 SDL2_image`
 LDFLAGS =
-LDLIBS = `pkg-config --libs gtk+-3.0 sdl2 SDL2_image` -lm
+LDLIBS = `pkg-config --libs gtk+-3.0 sdl2 SDL2_image ` -lm -lX11 -lpng
+ 
+all: cut urlEncoder qr2
 
-all: cut urlEncoder
-
-SRC = cut.c urlEncoder.c
+SRC = cut.c urlEncoder.c qr2.c
 OBJ = ${SRC:.c=.o}
 EXE = ${SRC:.c=}
 
-exec: ${OBJ}
 
 .PHONY: clean
 
