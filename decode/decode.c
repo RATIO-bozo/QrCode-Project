@@ -56,7 +56,7 @@ void initWithChar(char* charMatrix, size_t len)
             matrix[y][x] = charMatrix[y * N + x] - '0';
     }
 
-    printf("Loading done !\n");
+    //printf("Loading done !\n");
 
 }
 
@@ -521,7 +521,7 @@ char* decode()
     */
 
     V = (N-21) / 4 + 1;
-    printf("QrCode is version V, with V = %lu\n", V);
+    printf("QrCode is version  %lu\n", V);
 
     if (1 > V || V > 40)
         errx(1, "The QrCode version must be >= 1 and <= 40");
@@ -529,17 +529,17 @@ char* decode()
     getFormat();
     printf("QrCode has a ECC of %lu, and a mask of %lu.\n", ECC, mask);
 
-    printf("The coloured version of this QrCode would be: \n");
+    //printf("The coloured version of this QrCode would be: \n");
     //printMatrix();
     //_pause();
 
-    printf("Now we detect the patterns: \n");
+    //printf("Now we detect the patterns: \n");
 
     fillPatterns(matrix, N, V);
 
-    printf("Then, we apply the mask (mask %li) \n", mask);
+    //printf("Then, we apply the mask (mask %li) \n", mask);
     unMask(mask);
-    printf("UnMasking Done !\n");
+    //printf("UnMasking Done !\n");
 
     //printMatrix();
     //_pause();

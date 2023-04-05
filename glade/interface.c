@@ -41,12 +41,12 @@ void f_encode()
 	
 		gtk_widget_show_all(encode_window);
 	
-		gtk_label_set_text(GTK_LABEL(encode_label), "QR-Code genéré !");
+		gtk_label_set_text(GTK_LABEL(encode_label), "QR-Code généré !");
 }
 
 else
 {
-	gtk_label_set_text(GTK_LABEL(encode_label), "Aucune donnee n'a ete encodee");
+	gtk_label_set_text(GTK_LABEL(encode_label), "Aucune donnée n'a ete encodée");
 	
 	gtk_widget_show_all(encode_window);
 }
@@ -74,7 +74,7 @@ char* choose_file()
 {
 	GtkWidget * decode_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     
-    GtkWidget* decode_file = gtk_file_chooser_dialog_new("Choisir un QR-Code a decoder", GTK_WINDOW(decode_dialog),GTK_FILE_CHOOSER_ACTION_OPEN,"_Cancel",GTK_RESPONSE_CANCEL,"_Open",GTK_RESPONSE_ACCEPT,NULL);
+    GtkWidget* decode_file = gtk_file_chooser_dialog_new("Choisir un QR-Code a décoder", GTK_WINDOW(decode_dialog),GTK_FILE_CHOOSER_ACTION_OPEN,"_Cancel",GTK_RESPONSE_CANCEL,"_Open",GTK_RESPONSE_ACCEPT,NULL);
     
     gint result_dialog = gtk_dialog_run(GTK_DIALOG(decode_file));
     
@@ -124,7 +124,7 @@ void create_encode()
     GtkWidget * encode_box_generale = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 100);
     
     
-    GtkWidget * encode_bouton_generate = gtk_button_new_with_label("Generer le QR-Code");
+    GtkWidget * encode_bouton_generate = gtk_button_new_with_label("Générer le QR-Code");
     
     encode_entry =	gtk_entry_new();
     
@@ -193,7 +193,7 @@ void f_decode(){
 	
 	else
 	{
-		char * text_decode = "Veuillez choisir un QR-Code a decoder";
+		char * text_decode = "Veuillez choisir un QR-Code a décoder";
 	
 	gtk_label_set_text(GTK_LABEL(decode_text), text_decode );
 	gtk_widget_show_all(decode_window);
@@ -232,13 +232,13 @@ void create_decode()
     
     GtkWidget * decode_box_bas= gtk_box_new(GTK_ORIENTATION_VERTICAL, 100);
     
-    GtkWidget * decode_bouton_generate = gtk_button_new_with_label("Decoder le QR-Code");  
+    GtkWidget * decode_bouton_generate = gtk_button_new_with_label("Décoder le QR-Code");  
     
     GtkWidget * decode_bouton_retour = gtk_button_new_with_label("Page d'accueil");
     
     decode_text = gtk_label_new("");
     
-    GtkWidget * decode_choose = gtk_button_new_with_label("Choisir un QR-Code a decoder");
+    GtkWidget * decode_choose = gtk_button_new_with_label("Choisir un QR-Code a décoder");
     
     //ajout des widgets box
     
@@ -296,9 +296,9 @@ void create_generale(GtkApplication * appli)
 	
 	GtkWidget * generale_box_bas = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 50);
 	
-	GtkWidget * generale_bouton_decode = gtk_button_new_with_label("Decoder un QR-Code");
+	GtkWidget * generale_bouton_decode = gtk_button_new_with_label("Décoder un QR-Code");
 	
-	GtkWidget * generale_bouton_encode = gtk_button_new_with_label("Generer un QR-Code");
+	GtkWidget * generale_bouton_encode = gtk_button_new_with_label("Générer un QR-Code");
 	
 	GtkWidget * generale_logo  = gtk_image_new_from_file("logo.jpg");
 	
