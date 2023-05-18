@@ -15,12 +15,40 @@ GtkWidget* decode_box_gauche;
 GtkWidget* decode_text;
 char * path_image;
 
+void tempWriting(gchar * data)
+{
+	FILE *f = NULL;
+
+	f = fopen("/home/alexandre/Bureau/QrCode-Project/trash/temp","w");
+	fputs(data,f);
+	fclose(f);
+
+}
+
+
+void tempReading(char * res)
+{
+	FILE *f = NULL;
+
+	f = open("/home/alexandre/Bureau/QrCode-Project/trash/temp","r");
+	fgets(res,6,f);
+	fclose(f);
+
+
+
+}
+
+
+
+
 
 void f_encode()
 {
 	
 	
 	const gchar * encode_data = gtk_entry_get_text(GTK_ENTRY (encode_entry));
+
+	tempWriting(encode_data);
 	
 	int res = encode((char *)encode_data);
 	res = res+0;
@@ -179,15 +207,21 @@ void f_decode(){
 	if(path_image != NULL)
 	{
 		char * msg = malloc(sizeof(char)*64);
-		
+
+		char * res = (char *) malloc(64);
+
+		tempReading(res);
+		//res[5] = 0;
+
 		decode_main(path_image, msg);
 
-		printf("RESULTAT = %s \n",msg);
+		//printf("RESULTAT = %s \n",res);
 
 		gtk_label_set_text(GTK_LABEL(decode_text),msg );
 		gtk_label_set_selectable(GTK_LABEL(decode_text), 1);
 		gtk_widget_show_all(decode_window);
 		free(msg);
+		free(res);
 		
 	}
 	
