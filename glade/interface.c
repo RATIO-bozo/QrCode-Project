@@ -19,20 +19,23 @@ void tempWriting(gchar * data)
 {
 	FILE *f = NULL;
 
-	f = fopen("/home/alexandre/Bureau/QrCode-Project/trash/temp","w");
+	f = fopen("/home/torielfrisk/Bureau/QrCode-Project/trash/temp","w");
 	fputs(data,f);
 	fclose(f);
 
 }
 
 
-void tempReading(char * res)
+char * tempReading()
 {
 	FILE *f = NULL;
 
-	f = open("/home/alexandre/Bureau/QrCode-Project/trash/temp","r");
-	fgets(res,6,f);
+	char *c = malloc(sizeof(char) * 64);
+	f = fopen("/home/torielfrisk/Bureau/QrCode-Project/trash/temp","r");
+	fgets(c,100,f);
 	fclose(f);
+	return c;
+	
 
 
 
@@ -208,16 +211,16 @@ void f_decode(){
 	{
 		char * msg = malloc(sizeof(char)*64);
 
-		char * res = (char *) malloc(64);
-
-		tempReading(res);
+		char *res = (char *) malloc(64);
+		
+		
 		//res[5] = 0;
 
 		decode_main(path_image, msg);
 
-		//printf("RESULTAT = %s \n",res);
+		//printf("RESULTAT = %s \n",tempReading());
 
-		gtk_label_set_text(GTK_LABEL(decode_text),msg );
+		gtk_label_set_text(GTK_LABEL(decode_text),tempReading());
 		gtk_label_set_selectable(GTK_LABEL(decode_text), 1);
 		gtk_widget_show_all(decode_window);
 		free(msg);
