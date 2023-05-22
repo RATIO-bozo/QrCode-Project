@@ -30,9 +30,9 @@ char * tempReading()
 {
 	FILE *f = NULL;
 
-	char *c = malloc(sizeof(char) * 64);
+	char *c = malloc(sizeof(char) * 1000);
 	f = fopen("/home/torielfrisk/Bureau/QrCode-Project/trash/temp","r");
-	fgets(c,100,f);
+	fgets(c,1000,f);
 	fclose(f);
 	return c;
 	
@@ -211,20 +211,30 @@ void f_decode(){
 	{
 		char * msg = malloc(sizeof(char)*64);
 
-		char *res = (char *) malloc(64);
+		char *res = tempReading();
 		
 		
 		//res[5] = 0;
 
-		decode_main(path_image, msg);
+		//decode_main(path_image, msg);
 
 		//printf("RESULTAT = %s \n",tempReading());
 
-		gtk_label_set_text(GTK_LABEL(decode_text),tempReading());
-		gtk_label_set_selectable(GTK_LABEL(decode_text), 1);
-		gtk_widget_show_all(decode_window);
-		free(msg);
-		free(res);
+		if (strlen(res) <= 335)
+		{
+			gtk_label_set_text(GTK_LABEL(decode_text),tempReading());
+			gtk_label_set_selectable(GTK_LABEL(decode_text), 1);
+			gtk_widget_show_all(decode_window);
+			free(msg);
+		}
+		else
+		{
+			gtk_label_set_text(GTK_LABEL(decode_text),"Format supérieur à 9. QRCode non traité.");
+			printf("Format supérieur à 9. QRCode non traité.");
+			gtk_label_set_selectable(GTK_LABEL(decode_text), 1);
+			gtk_widget_show_all(decode_window);
+			free(msg);
+		}
 		
 	}
 	
@@ -307,6 +317,7 @@ void create_decode()
 	//g_signal_connect(decode_window,"delete_event",gtk_main_quit,NULL);
 	
 	g_signal_connect(decode_bouton_generate,"clicked",G_CALLBACK(f_decode),NULL);
+	path_image = NULL;
 	
 	gtk_widget_show_all(decode_window);
 	//visuel
