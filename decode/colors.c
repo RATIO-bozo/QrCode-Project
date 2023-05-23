@@ -6,6 +6,7 @@ void black()
     printf("\033[1;30m");
 }
 
+
 void white()
 {
     printf("\033[1;37m");
