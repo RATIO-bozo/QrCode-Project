@@ -25,7 +25,7 @@ int *final_struct(struct encdata* encode)
     for (size_t i = 0; i < t; i++)
     { 
         ec[i] = division(message[i], generator, encode->ec);
-	printf("Error code value : %d\n\n",*ec[i]);
+	//printf("Error code value : %d\n\n",*ec[i]);
     }
 
     size_t f = final_byte(encode->version);

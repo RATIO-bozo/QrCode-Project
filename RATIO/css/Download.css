@@ -1,0 +1,84 @@
+body {
+    primary-color: #212121;
+    background-color: #111;
+
+
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 36vw;
+    width: auto;
+
+    margin: 1vw;
+    padding: 1vw;
+
+    display: grid;
+    grid-template-rows: 8vw;
+    justify-items: center;
+
+    background-color: #2c2c2c;
+    font-family: sans-serif;
+}
+
+.sub-container {
+    display: grid;
+    grid-template-columns:  70vw 10vw;
+    grid-template-rows: 10vw 10vw;
+
+    margin-right: 24vw;
+}
+
+
+.main-section {
+    margin-left: 10vw;
+}
+
+button {
+    margin-top: 7vw;
+
+    height: 3vw;
+    border-radius: 2vw;
+    background-color: #00aff4;
+
+}
+
+.bout {
+    text-decoration: none;
+    color: black;
+}
+
+p {
+    margin: 0;
+    font-size: 1vw;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.ratio {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.download-section {
+    position: relative;
+}
+
+h1 {
+    border-radius: 1vw;
+
+    margin-top: 2vw;
+
+    width: 12vw;
+    text-align: center;
+    text-decoration: underline black;
+
+    color: #1F67B1;
+
+    background-color: white;
+
+    margin-bottom: 4vw;
+}

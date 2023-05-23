@@ -10,7 +10,7 @@ void setPixel(SDL_Surface *surface, Uint8 r, Uint8 g, Uint8 b, size_t x,
 
 void print_struct(struct encdata *qr){
     printf("version = %d\n", qr->version);
-    printf("mode indicator = %d\n", qr->mi);
+    //printf("mode indicator = %d\n", qr->mi);
     printf("size of input string = %lu\n", qr->size);
     printf("corection_level = %c\n", qr->correction_level);
     //more later;
